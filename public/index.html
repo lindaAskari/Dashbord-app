@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./output.css">
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+
+// Whenever the user explicitly chooses light mode
+localStorage.theme = 'light'
+
+// Whenever the user explicitly chooses dark mode
+localStorage.theme = 'dark'
+
+// Whenever the user explicitly chooses to respect the OS preference
+localStorage.removeItem('theme')
+  </script>
+</head>
+<body>
+  <div id="overlay" class="hidden w-full h-full fixed top-0 right-0 bg-gray-900 bg-opacity-50"></div>
+  <div class="hidden fixed w-64 md:flex h-full " id="sidebar">
+    <button  id="sidebar-close-icon" class="hidden absolute z-50 -right-12 top-4 bg-white">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+      
+    </button>
+    <div class="flex flex-col overflow-y-auto dark:bg-gray-900 bg-indigo-600 flex-grow " id="sidebar-content-layout">
+      <div><img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg" alt="Workflow"></div>
+      <nav class="space-y-5 px-5 mt-5">
+        <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        </svg>
+        </div>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+        </svg>
+        
+        </div>
+        <span>Team</span>
+      </a>
+      <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+        </svg>
+        
+        </div>
+        <span>Projects</span>
+      </a>
+      <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+        </svg>
+        
+        </div>
+        <span>Calender</span>
+      </a>
+      <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+        </svg>
+        
+        </div>
+        <span>Documents</span>
+      </a>
+      <a href="#" class="flex text-gray-200 items-center space-x-2 space-x-reverse">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+        </svg>
+        
+        </div>
+        <span>Reports</span>
+      </a>
+      </nav>
+      </div>
+  </div>
+
+  <div class="flex flex-col md:pl-64">
+    <div class="flex justify-between shadow h-16 items-center dark:bg-gray-700">
+      <button class="md:hidden text-gray-500 dark:text-gray-50 ml-4 p-2 focus:ring-indigo-200 focus:ring-2" id="sidebar-open-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+        </svg>
+        
+      </button>
+      <div class="w-full px-4 ">
+        <form class="flex w-full items-center">
+       
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-500 dark:text-gray-50">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            
+          </div>
+          <input type="text" placeholder="search " class="w-full h-14 pr-4 outline-none dark:bg-gray-700">
+        </form>
+      </div>
+      <div class="flex items-center">
+        <div class="pl-4 " id="dark-switch">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+      </div>
+        <div class="pl-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-500 dark:text-gray-50">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+          </svg>
+        </div>
+        <div class="">
+          <img  class="w-8 h-8 rounded-full" src="937bd777-dff9-4fdc-9f04-7d5baa70ab27.jpeg" alt="error">
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="py-8 px-8 space-y-2 dark:bg-gray-600">
+        <div class="max-w-7xl mx-auto ">
+          <span class="text-2xl font-semibold text-gray-900 ">Dashboard</span></div>
+        <div class="max-w-7xl mx-auto">
+          <div class="border-4 border-dashed h-96 border-gray-200 rounded-lg"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+
+    let darkButton = document.getElementById('dark-switch');
+        darkButton.addEventListener('click'  , () => {
+            if(document.documentElement.classList.contains('dark') ) {
+                localStorage.theme = 'light';
+                document.documentElement.classList.remove('dark');
+            } else {
+                localStorage.theme = 'dark';
+                document.documentElement.classList.add('dark');
+            }
+
+            location.reload();
+        })
+
+
+    const sidebar = document.getElementById('sidebar'),
+          sidebarCloseIcon = document.getElementById('sidebar-close-icon'),
+          sidebarOpenIcon = document.getElementById('sidebar-open-icon'),
+          overlay = document.getElementById('overlay');
+
+  function openSidebar() {
+      sidebar.classList.add('absolute','z-50', 'flex' , 'flex-row-reverse')
+      sidebar.classList.remove('hidden');
+
+      sidebarCloseIcon.classList.remove('hidden')
+      sidebarCloseIcon.classList.add('flex')
+     
+      document.body.classList.add('overflow-hidden')
+
+      overlay.classList.remove('hidden')
+  }
+
+  function closeSidebar() {
+      sidebar.classList.remove('absolute','z-50' , 'flex' , 'flex-row-reverse')
+      sidebar.classList.add('hidden');
+
+      sidebarCloseIcon.classList.add('hidden')
+      sidebarCloseIcon.classList.remove('flex')
+     
+      document.body.classList.remove('overflow-hidden')
+
+      overlay.classList.add('hidden')
+  }
+
+  sidebarOpenIcon.addEventListener('click' , () => openSidebar() );
+  sidebarCloseIcon.addEventListener('click' , () => closeSidebar())
+  overlay.addEventListener('click' , () => closeSidebar())
+  window.addEventListener('resize' , () => closeSidebar())
+</script>
+</body>
+</html>
